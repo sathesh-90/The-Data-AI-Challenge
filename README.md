@@ -1,4 +1,4 @@
-# RecruiterAI — Intelligent Candidate Discovery & Ranking
+# RecruiterAI — Modern AI-Powered Candidate Discovery & Ranking
 
 > Ranking candidates the way a great recruiter would — by **understanding who
 > fits the role**, not by matching keywords.
@@ -7,6 +7,42 @@ Submission for the Redrob **Data & AI Challenge: Intelligent Candidate
 Discovery**. Given the "Senior AI Engineer — Founding Team" job description,
 RecruiterAI ranks the **top 100 candidates out of a 100,000-candidate pool** and
 explains *why* each one is there.
+
+## Modernized Tech Stack
+
+The project has been updated to follow a current AI-first architecture for
+recruiting intelligence:
+
+- AI & NLP: GPT-4 / Llama 3, Sentence Transformers, BERT / SBERT
+- Vector Search: FAISS, Pinecone, Weaviate
+- Backend: Python, FastAPI, Pydantic
+- Frontend: React.js, Streamlit
+- Data Layer: PostgreSQL, MongoDB
+- Deployment: Docker, AWS / Azure / GCP
+
+## Updated Project Direction
+
+The upgraded RecruiterAI workflow transforms an unstructured job description and
+a large candidate pool into an explainable, AI-ranked shortlist. It combines
+LLM-based JD parsing, semantic matching, vector search, and multi-signal
+scoring to improve recall and reduce manual screening effort.
+
+### Core Solution
+- LLM-powered JD parsing and intent extraction
+- BGE embeddings with FAISS-based hybrid vector search
+- Multi-agent pipeline: Parser → Ranker → Explainer
+- Hybrid scoring across 8 candidate signal dimensions
+
+### Quick Start
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+```
+
+Then open http://127.0.0.1:8000/docs for the API documentation.
 
 ```
 python rank.py --candidates ./data/raw/candidates.jsonl --out ./data/output/submission.csv
