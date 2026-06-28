@@ -1,0 +1,30 @@
+# ---- Large dataset: do NOT commit the 465 MB pool ----
+data/raw/candidates.jsonl
+data/raw/candidates.jsonl.gz
+data/cache/
+data/output/*.csv
+
+# Keep the small reference files in data/raw (schema, sample, docs, validator).
+!data/raw/candidate_schema.json
+!data/raw/sample_candidates.json
+!data/raw/sample_submission.csv
+!data/raw/*.md
+!data/raw/*.yaml
+!data/raw/validate_submission.py
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# ---- OS / editor junk ----
+.DS_Store
+__MACOSX/
+.idea/
+.vscode/
+*.swp

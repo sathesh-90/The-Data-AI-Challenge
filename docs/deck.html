@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>RecruiterAI — Approach Deck</title>
+<style>
+  :root{
+    --ink:#0f172a; --sub:#475569; --line:#e2e8f0; --bg:#ffffff;
+    --brand:#0b6bcb; --brand2:#0891b2; --good:#0a8f4f; --bad:#d23b3b;
+    --chip:#eff6ff; --soft:#f8fafc;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:#334155;color:var(--ink);
+    font-family:"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .slide{
+    position:relative;width:1280px;min-height:720px;margin:24px auto;background:var(--bg);
+    padding:56px 64px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.35);
+  }
+  .kicker{font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);font-weight:700}
+  h1{font-size:58px;line-height:1.05;margin:10px 0 8px}
+  h2{font-size:38px;line-height:1.1;margin:6px 0 22px}
+  h3{font-size:22px;margin:0 0 6px}
+  p,li{font-size:21px;line-height:1.5;color:var(--ink)}
+  .sub{color:var(--sub)}
+  .small{font-size:17px}
+  .tag{display:inline-block;background:var(--chip);color:var(--brand);border:1px solid #dbeafe;
+    border-radius:999px;padding:6px 14px;font-size:15px;font-weight:600;margin:4px 6px 4px 0}
+  .grid{display:grid;gap:18px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:1fr 1fr 1fr}
+  .card{background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:20px 22px}
+  .card h3{color:var(--brand)}
+  .pill{font-size:15px;font-weight:700;color:#fff;background:var(--brand);border-radius:8px;padding:3px 10px}
+  table{border-collapse:collapse;width:100%;font-size:18px}
+  th,td{border-bottom:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+  th{color:var(--sub);font-size:14px;letter-spacing:.04em;text-transform:uppercase}
+  td .w{font-weight:800;color:var(--brand)}
+  .flow{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:8px}
+  .node{background:#fff;border:2px solid var(--brand);color:var(--brand);font-weight:700;
+    border-radius:10px;padding:10px 14px;font-size:16px}
+  .node.alt{border-color:var(--brand2);color:var(--brand2)}
+  .arr{color:var(--sub);font-weight:800;font-size:20px}
+  .good{color:var(--good);font-weight:700}
+  .bad{color:var(--bad);font-weight:700}
+  .foot{position:absolute;bottom:22px;left:64px;right:64px;display:flex;justify-content:space-between;
+    color:#94a3b8;font-size:14px;border-top:1px solid var(--line);padding-top:10px}
+  .big{font-size:64px;font-weight:800;color:var(--brand);line-height:1}
+  .stat{font-size:40px;font-weight:800;color:var(--brand)}
+  .mono{font-family:"Cascadia Code",Consolas,monospace;font-size:16px;background:#0f172a;color:#e2e8f0;
+    border-radius:10px;padding:14px 16px;display:block;white-space:pre-wrap}
+  .center{text-align:center}
+  .hero{height:720px;display:flex;flex-direction:column;justify-content:center;
+    background:linear-gradient(135deg,#0b6bcb 0%,#0891b2 100%);color:#fff}
+  .hero h1{font-size:74px;margin:0}
+  .hero .kicker{color:#cfe8ff}
+  .hero p{color:#eaf6ff;font-size:24px}
+  @media print{
+    html,body{background:#fff}
+    .slide{margin:0;box-shadow:none;width:100%;min-height:100vh;page-break-after:always}
+    @page{size:1280px 720px;margin:0}
+  }
+</style>
+</head>
+<body>
+
+<!-- 1 — TITLE -->
+<section class="slide hero">
+  <div class="kicker">Data &amp; AI Challenge · Intelligent Candidate Discovery</div>
+  <h1>RecruiterAI</h1>
+  <p style="font-size:30px;margin-top:6px;font-weight:600">Finding Talent <em>Beyond Keywords</em></p>
+  <p>Ranking 100,000 candidates the way a great recruiter would —<br>by understanding who actually fits the role.</p>
+</section>
+
+<!-- 2 — PROBLEM -->
+<section class="slide">
+  <div class="kicker">The Problem</div>
+  <h2>Keyword filters can't see what matters</h2>
+  <div class="grid g2">
+    <div class="card"><h3>What recruiters face</h3>
+      <p>Hundreds of profiles, and the right person still gets missed — not because
+      the talent isn't there, but because keyword matching is blind to
+      <b>context, trajectory, and intent</b>.</p></div>
+    <div class="card"><h3>What "fit" really means</h3>
+      <p>The job needs someone who <b>built</b> retrieval &amp; ranking systems —
+      not someone who merely <b>lists</b> the words. Those are very different people.</p></div>
+  </div>
+  <div class="card" style="margin-top:18px;border-color:#fed7d7;background:#fff5f5">
+    <h3 class="bad">The dataset is adversarial — on purpose</h3>
+    <p>100K candidates seeded with <b>keyword stuffers</b>, <b>plain-language strong fits</b>,
+    <b>behavioural twins</b>, and <b>~80 honeypots</b> with subtly impossible profiles.
+    A naïve embedding/keyword model walks straight into every trap.</p>
+  </div>
+  <div class="foot"><span>RecruiterAI</span><span>2 / 12</span></div>
+</section>
+
+<!-- 3 — CONSTRAINTS -->
+<section class="slide">
+  <div class="kicker">Reading the Constraints</div>
+  <h2>The limits <em>are</em> the design brief</h2>
+  <table>
+    <tr><th>Constraint</th><th>What it rules out</th></tr>
+    <tr><td><span class="pill">≤ 5 min · CPU · no network</span></td>
+        <td>No hosted LLM call per candidate. 100K API calls won't fit, and the
+            reproduction sandbox has <b>no internet and no GPU</b>.</td></tr>
+    <tr><td><span class="pill">100,000 candidates</span></td>
+        <td>Per-candidate deep inference is too slow — needs a fast, streaming scoring pass.</td></tr>
+    <tr><td><span class="pill">Honeypot rate &gt; 10% = DQ</span></td>
+        <td>The model must actually <b>read profiles</b>, not embed keywords.</td></tr>
+    <tr><td><span class="pill">Stage 4–5: defend your work</span></td>
+        <td>Every score must be <b>explainable</b> by a human, not a black box.</td></tr>
+  </table>
+  <p class="sub" style="margin-top:22px">➡ A per-candidate GPT-4 pipeline is disqualified before it scores a single point.
+     The winning shape is a <b>fast, transparent, deterministic ranker</b>.</p>
+  <div class="foot"><span>RecruiterAI</span><span>3 / 12</span></div>
+</section>
+
+<!-- 4 — APPROACH -->
+<section class="slide">
+  <div class="kicker">Our Approach</div>
+  <h2>A transparent hybrid ranker</h2>
+  <div class="grid g3">
+    <div class="card"><h3>Read the role, not the words</h3>
+      <p class="small">The JD is encoded as competency lexicons, weights and disqualifiers —
+      what the role <i>means</i>, not just what it says.</p></div>
+    <div class="card"><h3>Score the whole picture</h3>
+      <p class="small">Seven fit components × a behavioural-availability modifier ×
+      penalty factors for the JD's explicit disqualifiers.</p></div>
+    <div class="card"><h3>Explain every pick</h3>
+      <p class="small">Each candidate gets specific, non-templated reasoning grounded
+      only in facts from their profile.</p></div>
+  </div>
+  <div class="card center" style="margin-top:22px;background:#0f172a;color:#fff;border:none">
+    <p style="font-size:24px;margin:0;color:#fff">
+      score = <span style="color:#7dd3fc">Σ wᵢ·componentᵢ</span>
+      × <span style="color:#86efac">behavioural_modifier</span>
+      × <span style="color:#fca5a5">penalty_factors</span>
+      × <span style="color:#fcd34d">honeypot_kill</span>
+    </p>
+  </div>
+  <div class="foot"><span>RecruiterAI</span><span>4 / 12</span></div>
+</section>
+
+<!-- 5 — PIPELINE -->
+<section class="slide">
+  <div class="kicker">Architecture</div>
+  <h2>One streaming pass, bounded memory</h2>
+  <div class="flow">
+    <span class="node">candidates.jsonl</span><span class="arr">→</span>
+    <span class="node">stream record</span><span class="arr">→</span>
+    <span class="node">feature extraction</span><span class="arr">→</span>
+    <span class="node">fit scoring</span>
+  </div>
+  <div class="flow" style="margin-top:14px">
+    <span class="node alt">behavioural modifier</span><span class="arr">→</span>
+    <span class="node alt">penalty / honeypot</span><span class="arr">→</span>
+    <span class="node alt">top-N heap</span><span class="arr">→</span>
+    <span class="node alt">reasoning</span><span class="arr">→</span>
+    <span class="node alt">submission.csv</span>
+  </div>
+  <div class="grid g2" style="margin-top:26px">
+    <div class="card"><h3>Why streaming</h3>
+      <p class="small">We never hold all 100K parsed records in RAM — only a small
+      heap of the strongest candidates. Peak memory stays far under 16 GB.</p></div>
+    <div class="card"><h3>Why deterministic</h3>
+      <p class="small">Same input → same output, every run. Reproduces unchanged in
+      the Stage-3 sandbox; defensible line-by-line at the interview.</p></div>
+  </div>
+  <div class="foot"><span>RecruiterAI</span><span>5 / 12</span></div>
+</section>
+
+<!-- 6 — DATA FLOW -->
+<section class="slide">
+  <div class="kicker">Data Flow</div>
+  <h2>From raw record to ranked shortlist</h2>
+  <div class="grid g2">
+    <div>
+      <div class="node">Raw candidate record (JSONL)</div><div class="arr">↓</div>
+      <div class="node">Parse &amp; validate (defensive)</div><div class="arr">↓</div>
+      <div class="node">Derive signals — title class, skill-trust,<br>build-evidence, tenure, location</div><div class="arr">↓</div>
+      <div class="node">Consistency / honeypot checks</div>
+    </div>
+    <div>
+      <div class="node alt">Fit components (7) → base score</div><div class="arr">↓</div>
+      <div class="node alt">× behavioural availability</div><div class="arr">↓</div>
+      <div class="node alt">× penalties · honeypot floor</div><div class="arr">↓</div>
+      <div class="node alt">Rank · tie-break · reasoning</div><div class="arr">↓</div>
+      <div class="node alt">Top-100 submission CSV</div>
+    </div>
+  </div>
+  <div class="foot"><span>RecruiterAI</span><span>6 / 12</span></div>
+</section>
+
+<!-- 7 — FIT SCORE -->
+<section class="slide">
+  <div class="kicker">The Fit Score</div>
+  <h2>Seven components, every one explainable</h2>
+  <table>
+    <tr><th>Component</th><th>Weight</th><th>What it captures</th></tr>
+    <tr><td><b>Title</b></td><td><span class="w">0.26</span></td><td>Is the current role actually an ML/AI/search engineer? <i>The decisive guard against keyword stuffers.</i></td></tr>
+    <tr><td><b>Skills</b></td><td><span class="w">0.22</span></td><td>Trust-weighted core-competency coverage — endorsements + months-of-use neutralise padded lists.</td></tr>
+    <tr><td><b>Evidence</b></td><td><span class="w">0.18</span></td><td>Did they <i>build</i> ranking / search / recsys / retrieval at scale? Lets plain-language fits win.</td></tr>
+    <tr><td><b>Experience</b></td><td><span class="w">0.12</span></td><td>5–9 year band, ideal 6–8.</td></tr>
+    <tr><td><b>Company</b></td><td><span class="w">0.09</span></td><td>Product company vs. services/consulting-only career.</td></tr>
+    <tr><td><b>Location</b></td><td><span class="w">0.08</span></td><td>Pune/Noida preferred; Hyderabad/Mumbai/Delhi-NCR/Bangalore welcome.</td></tr>
+    <tr><td><b>Education</b></td><td><span class="w">0.05</span></td><td>Low on purpose — the JD cares what you built.</td></tr>
+  </table>
+  <p class="sub small" style="margin-top:14px">Weights live in <span class="tag">configs/scoring_config.yaml</span> — auto-normalised, tunable, defensible.</p>
+  <div class="foot"><span>RecruiterAI</span><span>7 / 12</span></div>
+</section>
+
+<!-- 8 — BEATING THE TRAPS -->
+<section class="slide">
+  <div class="kicker">Beating the Traps</div>
+  <h2>Two ideas that defeat the dataset</h2>
+  <div class="grid g2">
+    <div class="card"><h3>① Title × skill-trust</h3>
+      <p class="small">A keyword stuffer has a <b>perfect skill list</b> but a
+      <span class="bad">non-engineering title</span> and skills with 0 endorsements
+      / 0 months of use.</p>
+      <p class="small">Title crushes the first; a per-skill <b>trust multiplier</b>
+      discounts the second.</p>
+      <p class="small"><span class="bad">"Marketing Manager + 9 AI skills"</span> →
+      sinks. <span class="good">plain-language builder</span> → rises.</p></div>
+    <div class="card"><h3>② Consistency honeypot check</h3>
+      <p class="small">Honeypots are <i>subtly impossible</i>: 8 yrs tenure in a
+      3-year-old role; "expert" in 10 skills with 0 months used.</p>
+      <p class="small">We detect the violations and <b>floor the score</b>.</p>
+      <p class="small">Result: <span class="good">0 honeypots</span> in our top 100
+      (DQ threshold &gt; 10%).</p></div>
+  </div>
+  <div class="card" style="margin-top:18px;background:#fff5f5;border-color:#fed7d7">
+    <p class="small" style="margin:0">The provided <b>sample_submission.csv</b> ranks keyword stuffers at the top —
+    it is a <span class="bad">deliberately wrong</span> format reference. We rank the opposite way.</p>
+  </div>
+  <div class="foot"><span>RecruiterAI</span><span>8 / 12</span></div>
+</section>
+
+<!-- 9 — SIGNALS -->
+<section class="slide">
+  <div class="kicker">Signal Integration</div>
+  <h2>Is the candidate actually hire-able?</h2>
+  <p class="sub">A perfect-on-paper profile inactive for 6 months with a 5% response rate
+     is, for hiring, <b>not available</b>. The 23 Redrob behavioural signals become a
+     multiplicative availability modifier (down to ~0.3×).</p>
+  <div class="grid g3" style="margin-top:10px">
+    <div class="card"><h3>Availability</h3><p class="small">recruiter response rate · activity recency · open-to-work · notice period</p></div>
+    <div class="card"><h3>Demand</h3><p class="small">saved by recruiters · search appearances · interview-completion rate</p></div>
+    <div class="card"><h3>Trust</h3><p class="small">verified email/phone · profile completeness · LinkedIn connected</p></div>
+  </div>
+  <div class="card" style="margin-top:18px"><h3>Penalty factors — the JD's explicit "do-not-want"</h3>
+    <p class="small">CV/speech-only without NLP/IR · research-only with no production ·
+    consulting-only career · title-chasing (&lt;20-month tenures) · recent LangChain-only dabbler.</p></div>
+  <div class="foot"><span>RecruiterAI</span><span>9 / 12</span></div>
+</section>
+
+<!-- 10 — TECH -->
+<section class="slide">
+  <div class="kicker">Technologies Used</div>
+  <h2>Lean by design, honest by necessity</h2>
+  <div class="grid g2">
+    <div class="card"><h3 class="good">In the ranking step (what scores the CSV)</h3>
+      <p><span class="tag">Python 3.11 (standard library only)</span>
+         <span class="tag">streaming JSONL</span>
+         <span class="tag">heap top-N</span>
+         <span class="tag">rule-based hybrid scoring</span>
+         <span class="tag">deterministic · CPU · offline</span></p>
+      <p class="small sub">Zero third-party packages → reproduces unchanged in the sandbox.</p></div>
+    <div class="card"><h3>Optional / demo &amp; future work</h3>
+      <p><span class="tag">scikit-learn — TF-IDF re-rank</span>
+         <span class="tag">sentence-transformers / SBERT</span>
+         <span class="tag">FAISS</span>
+         <span class="tag">Streamlit sandbox</span>
+         <span class="tag">pytest</span></p>
+      <p class="small sub">Embedding/vector search is the natural next step — offline,
+      never a per-candidate API call.</p></div>
+  </div>
+  <p class="sub small" style="margin-top:16px">No GPT-4/Pinecone/hosted-LLM calls during ranking — the constraints forbid it, and the
+     transparent model is what survives Stages 3–5.</p>
+  <div class="foot"><span>RecruiterAI</span><span>10 / 12</span></div>
+</section>
+
+<!-- 11 — RESULTS -->
+<section class="slide">
+  <div class="kicker">Results · 100K Pool</div>
+  <h2>Fast, valid, trap-resistant</h2>
+  <div class="grid g3">
+    <div class="card center"><div class="stat">~32 s</div><p class="small">full run, 1 CPU core, no network <span class="good">(budget: 5 min)</span></p></div>
+    <div class="card center"><div class="stat">0%</div><p class="small">honeypots in top 100 <span class="good">(DQ: &gt; 10%)</span></p></div>
+    <div class="card center"><div class="stat">valid ✓</div><p class="small">official validate_submission.py</p></div>
+    <div class="card center"><div class="stat">92 / 100</div><p class="small">top-100 are core ML/AI-engineer titles (8 adjacent, <b>0 stuffers</b>)</p></div>
+    <div class="card center"><div class="stat">46%</div><p class="small">top-100 in preferred / welcome cities; 47% elsewhere in India</p></div>
+    <div class="card center"><div class="stat">65</div><p class="small">honeypots detected &amp; de-prioritised across the pool</p></div>
+  </div>
+  <span class="mono" style="margin-top:18px">1   Search Engineer · 7.6 yrs · Milvus, Semantic Search, Weaviate · a/b test · Gurgaon · responsive 0.94
+100 Filler: 120-day notice. Still a fit — Senior Data Scientist · 6.5 yrs · Milvus, OpenSearch, Qdrant · Noida</span>
+  <div class="foot"><span>RecruiterAI</span><span>11 / 12</span></div>
+</section>
+
+<!-- 12 — THANK YOU -->
+<section class="slide hero">
+  <div class="kicker">Thank You</div>
+  <h1>RecruiterAI</h1>
+  <p style="font-size:26px">Finding talent beyond keywords —<br>fast, explainable, trap-resistant.</p>
+  <p style="margin-top:18px"><span class="mono" style="display:inline-block;background:rgba(255,255,255,.15)">python rank.py --candidates ./data/raw/candidates.jsonl --out ./data/output/submission.csv</span></p>
+  <p style="font-size:22px;margin-top:26px">Questions &amp; Discussion 🚀</p>
+</section>
+
+</body>
+</html>

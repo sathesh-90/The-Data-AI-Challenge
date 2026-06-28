@@ -1,0 +1,30 @@
+# RecruiterAI scoring configuration
+# ----------------------------------
+# Component weights for the fit score. These are renormalised to sum to 1.0 at
+# load time, so you can tune relative importance freely. Each component is a
+# value in [0, 1]; see src/scoring.py for how each is computed.
+#
+# Rationale (traceable to job_description.md):
+#   title     - the decisive guard against keyword-stuffer traps
+#               (AI skills + "Marketing Manager" title => not a fit)
+#   skills    - trust-weighted core-competency coverage (endorsements+duration
+#               neutralise lazy keyword stuffing)
+#   evidence  - did they actually BUILD ranking/search/recsys/retrieval at scale
+#               (lets plain-language strong fits rank well without buzzwords)
+#   experience- 5-9 yr band, ideal 6-8
+#   company   - product company vs services/consulting-only career
+#   location  - Pune/Noida preferred; Hyderabad/Mumbai/Delhi-NCR/Bangalore welcome
+#   education - intentionally low weight; the JD cares what you built
+
+weights:
+  title: 0.26
+  skills: 0.22
+  evidence: 0.18
+  experience: 0.12
+  company: 0.09
+  location: 0.08
+  education: 0.05
+
+# Size of the working shortlist kept during the streaming pass before the final
+# sort. A few hundred guarantees a correct top-100 with negligible memory.
+keep: 400

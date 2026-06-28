@@ -1,0 +1,62 @@
+# Redrob Hackathon - Submission Metadata
+# Fill in the TODO fields before you submit via the portal.
+
+team_name: "With2'S
+
+primary_contact:
+  name: "TODO Full Name"
+  email: "xcloud.siemens@gmail.com"
+  phone: "+91-XXXXXXXXXX"
+
+team_members:
+  - name: "TODO Member 1"
+    email: "xcloud.siemens@gmail.com"
+    role: "ML Engineer"
+
+# ----------------------------------------------------------------------------
+# Code and reproducibility
+# ----------------------------------------------------------------------------
+github_repo: "https://github.com/TODO_USERNAME/RecruiterAI"
+sandbox_link: "https://huggingface.co/spaces/TODO_USERNAME/recruiterai-ranker"
+reproduce_command: "python rank.py --candidates ./data/raw/candidates.jsonl --out ./data/output/submission.csv"
+
+# ----------------------------------------------------------------------------
+# Compute environment
+# ----------------------------------------------------------------------------
+compute:
+  platform: "Windows 11, local CPU"
+  cpu_cores: 8
+  ram_gb: 16
+  python_version: "3.11"
+  os: "Windows 11"
+  uses_gpu_for_inference: false
+  has_network_during_ranking: false
+  pre_computation_required: false
+  pre_computation_time_minutes: 0
+
+
+# ----------------------------------------------------------------------------
+# Approach summary
+# ----------------------------------------------------------------------------
+methodology_summary: |
+  Transparent rule-based hybrid ranker, CPU-only, no network. A weighted fit
+  score over seven components (title, trust-weighted skills, build-evidence,
+  experience band, product-vs-consulting company, location, education) is
+  multiplied by a behavioural-availability modifier (response rate, activity
+  recency, open-to-work, notice period) and by penalty factors for the JD's
+  explicit disqualifiers (keyword-stuffer non-engineering titles, CV/speech-only
+  without NLP/IR, research-only, consulting-only, title-chasing, LangChain-only
+  dabblers). The title + skill-trust interaction defeats the keyword-stuffer
+  traps; an internal-consistency check forces ~80 honeypots to the floor so they
+  never reach the top 100. Runs end-to-end over 100K candidates in well under
+  the 5-minute CPU budget.
+
+# ----------------------------------------------------------------------------
+# Declarations
+# ----------------------------------------------------------------------------
+declarations:
+  read_submission_spec: true
+  code_is_original_work: true
+  no_collusion: true
+  honeypot_check_done: true
+  reproduction_tested: true
