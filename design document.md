@@ -4,9 +4,18 @@ How RecruiterAI turns 100K raw candidate records into a ranked, explained top 10
 
 ## Approach in one line
 
-A transparent, deterministic rule-based scorer — not "GPT-4 per candidate."
-With no network and a 5-minute CPU budget, 100K LLM calls are impossible anyway,
-and a rule-based scorer is fully explainable, which is what the task rewards.
+A transparent, AI-assisted candidate ranking system that combines deterministic
+scoring with modern NLP and retrieval technologies. The project uses Python,
+FastAPI, Pydantic, Uvicorn, Sentence Transformers, FAISS, OpenAI, PyYAML,
+pytest, JSONL/CSV/YAML data formats, and Docker to build an explainable
+recruiting workflow.
+
+## Technology stack
+
+- **Backend:** Python, FastAPI, Pydantic, Uvicorn
+- **AI / NLP:** Sentence Transformers, OpenAI, FAISS
+- **Data & Config:** JSONL, CSV, YAML, PyYAML
+- **Testing & Packaging:** pytest, Docker
 
 ## Pipeline
 

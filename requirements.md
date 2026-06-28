@@ -8,6 +8,22 @@ RecruiterAI ranks the top 100 candidates out of a ~100,000-candidate pool for th
 Pick the candidates a good recruiter would pick — people who *fit the role* — not
 the ones who stuffed the most keywords into their profile.
 
+## Technology stack
+
+The project is implemented using:
+
+- Python
+- FastAPI
+- Pydantic
+- Uvicorn
+- Sentence Transformers
+- FAISS
+- OpenAI
+- PyYAML
+- pytest
+- JSONL / CSV / YAML
+- Docker
+
 ## Must have
 
 - Read `candidates.jsonl` (one record per line) and write a ranked

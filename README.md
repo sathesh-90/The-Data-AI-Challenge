@@ -8,17 +8,21 @@ Discovery**. Given the "Senior AI Engineer — Founding Team" job description,
 RecruiterAI ranks the **top 100 candidates out of a 100,000-candidate pool** and
 explains *why* each one is there.
 
-## Modernized Tech Stack
+## Technology Stack
 
-The project has been updated to follow a current AI-first architecture for
-recruiting intelligence:
+The project uses the following technologies:
 
-- AI & NLP: GPT-4 / Llama 3, Sentence Transformers, BERT / SBERT
-- Vector Search: FAISS, Pinecone, Weaviate
-- Backend: Python, FastAPI, Pydantic
-- Frontend: React.js, Streamlit
-- Data Layer: PostgreSQL, MongoDB
-- Deployment: Docker, AWS / Azure / GCP
+- Python
+- FastAPI
+- Pydantic
+- Uvicorn
+- Sentence Transformers
+- FAISS
+- OpenAI
+- PyYAML
+- pytest
+- JSONL / CSV / YAML
+- Docker
 
 ## Updated Project Direction
 
